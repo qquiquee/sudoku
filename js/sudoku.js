@@ -1,8 +1,8 @@
 const grid = document.getElementById("grid");
 
-for(let i = 1; i < 9; i++)
+for(let i = 1; i < 5; i++)
 {
-    for(let x = 1; x < 9; x++)
+    for(let x = 1; x < 5; x++)
     {
         var item = document.createElement("div");
         //item.setAttribute("style", "grid-area:" + i + " / " + x + " / " + i + " / " + x);
