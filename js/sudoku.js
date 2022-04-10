@@ -1,6 +1,3 @@
-createGrid();
-layoutGrid(5, 5);
-fillGrid(5, 5, 4, 2, "green");
 
 const createGrid = () => {
     const markup = `
@@ -28,3 +25,6 @@ const fillGrid = (x, y, blockSize, numOfBlocks, color) => {
                 container.innerHTML += markup
             };
 }
+createGrid();
+layoutGrid(5, 5);
+fillGrid(5, 5, 4, 2, "green");
