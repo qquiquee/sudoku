@@ -27,4 +27,4 @@ const fillGrid = (x, y, blockSize, numOfBlocks, color) => {
 }
 createGrid();
 layoutGrid(5, 5);
-fillGrid(5, 5, 4, 12, "green");
+fillGrid(5, 15, 4, 4, "blue");
