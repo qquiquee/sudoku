@@ -6,7 +6,7 @@ const createGrid = () => {
                                                  height:100%; 
                                                  width: 100%">
     </div> `
-    document.body.innerHTML += markup
+    document.body.innerHTML = markup
 }
 const layoutGrid = (height, width) => {
     const container = document.getElementById('container')
@@ -27,4 +27,4 @@ const fillGrid = (x, y, blockSize, numOfBlocks, color) => {
 }
 createGrid();
 layoutGrid(5, 5);
-fillGrid(5, 15, 4, 4, "blue");
+fillGrid(5, 15, 4, 4, "green");
