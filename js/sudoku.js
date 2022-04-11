@@ -1,30 +1,67 @@
 
 const createGrid = () => {
     const markup = `
-    <div class="container" id="container" style="display: grid;
-                                                 border: 1px black solid; 
-                                                 height:100%; 
-                                                 width: 100%">
-    </div> `
+    <div class="container"
+    id="container" 
+    style=  "
+    float: left;
+    display: inline-grid;
+    border: 3px #110156 solid; 
+    grid-template-columns: repeat(9,100px);
+    grid-template-rows:  repeat(9,100px);
+            "
+    >
+    </div>
+    `
     document.body.innerHTML = markup
 }
-const layoutGrid = (height, width) => {
-    const container = document.getElementById('container')
-    container.style.gridTemplateColumns = `repeat(${width}, 1fr)`
-    container.style.gridTemplateRows = `repeat(${height}, 1fr)`
+const createHelp = () => {
+    const markup = `
+    <div class="help"
+    id="help"
+    style=  "
+    float: left;
+    width: 500px;
+    min-height: 500px;
+    border: 1px black solid;
+    margin-left: 20px;
+    ;
+            "
+    >
+Help
+    </div>
+    `
+    document.body.innerHTML += markup
 }
-const fillGrid = (x, y, blockSize, numOfBlocks, color) => {
+
+const fillGrid = (color) => {
     const container = document.getElementById('container')
-    const test = Array(numOfBlocks).keys()
-            for (var i of test){
-                let markup = `<div id="card ${i}" 
-                                   style="grid-column: ${Math.floor(Math.random() * y) + 1} / span ${blockSize}; 
-                                          grid-row: ${Math.floor(Math.random() * x) + 1} / span ${blockSize};
-                                          background-color: ${color};
-                                          border: 1px black solid;">${i}</div>`
-                container.innerHTML += markup
+    let gruesoT=1,gruesoR=1,colorL='#000000'
+        for (let i=1; i<=9;i++){
+            for (let j=1; j<=9;j++){
+                if(i==4 || i==7){gruesoT=3;colorL='#110156';}
+                if(j==3 || j==6){gruesoR=3;colorL='#110156';}
+            let casilla = `
+            <div 
+            id="casilla${i}${j}" 
+            style="
+            background-color: ${color};
+            border: 1px black solid;
+            border-top: ${gruesoT}px ${colorL} solid;
+            border-right : ${gruesoR}px ${colorL} solid;
+            text-align: center;
+            font-size : 60px;
+            padding-top: 15px;
+            color: grey;
+            ">
+            ${i}
+            </div>`
+            container.innerHTML += casilla
+            gruesoT=1,gruesoR=1;colorL='#000000'
             };
+        };
 }
 createGrid();
-layoutGrid(10, 10);
-fillGrid(5, 15, 4, 4, "green");
+createHelp();
+// layoutGrid(10, 10);
+fillGrid('#FFF4DB');
