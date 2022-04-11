@@ -15,7 +15,7 @@ const layoutGrid = (height, width) => {
 }
 const fillGrid = (x, y, blockSize, numOfBlocks, color) => {
     const container = document.getElementById('container')
-    const test = Array(num_of_blocks).keys()
+    const test = Array(numOfBlocks).keys()
             for (var i of test){
                 let markup = `<div id="card ${i}" 
                                    style="grid-column: ${Math.floor(Math.random() * y) + 1} / span ${blockSize}; 
