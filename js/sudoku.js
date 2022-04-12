@@ -1,4 +1,7 @@
-console.log(primero)
+import * as config from './config.js';
+import * as funciones from './funciones.js';
+
+console.log(config.primero)
 const createGrid = (place) => {
     const placeIn = document.getElementById(place)
     const markup = `
@@ -18,7 +21,7 @@ const createGrid = (place) => {
     `
     placeIn.innerHTML = markup
     fillGrid('#FFF4DB'); //· Crea las casillas con el color definido ·//
-    cargarProblema(primero); //· Carga un problema de ejemplo ·//
+    cargarProblema(config.primero); //· Carga un problema de ejemplo ·//
 }
 const createHelp = () => {
     const markup = `
@@ -48,9 +51,10 @@ const fillGrid = (color) => {
             let casilla = `
             <div 
             id="casilla${numCasilla}" 
+            class="casillas" 
             fila=${i} 
             columna=${j} 
-            area=${areas[numCasilla]}
+            area=${config.areas[numCasilla]}
             style="
                 background-color: ${color};
                 border: 1px black solid;
@@ -59,7 +63,6 @@ const fillGrid = (color) => {
                 text-align: center;
                 font-size : 5vh;
                 padding-top: 0.2vh;
-                color: grey;
             ">
             ${i}
             </div>`
@@ -73,8 +76,42 @@ const cargarProblema = (posicion) => {
     for (let i=1; i<=81;i++){
         const casillaSeleccionada = document.getElementById(`casilla${i}`)
         casillaSeleccionada.textContent = posicion[i];
+        casillaSeleccionada.style.color = '#000000'
     }
 }
+
+document.attachEvent = function( evt, q, fn ) {		//· Para crear los eventos de los elemento creados dinamicamente·//
+	document.addEventListener( evt, ( e ) => {
+		if (e.target.matches( q ) ) {
+		 fn.apply( e.target, [e] );
+	 }
+	});  
+ };
+
+//  document.attachEvent('click','.casillas', function() {
+//     alert(`
+//     Casilla:    ${this.id.match(/(\d+)/g)}
+//     fila:       ${this.getAttribute('fila')}
+//     columna:    ${this.getAttribute('columna')}
+//     area:       ${this.getAttribute('area')}
+//     valor:      ${this.textContent} 
+//     `)
+// });
+
+document.attachEvent('contextmenu','.casillas', function() { //· click derecho sobre las casillas ·//
+    alert(`
+    Casilla:    ${this.id.match(/(\d+)/g)}
+    fila:       ${this.getAttribute('fila')}
+    columna:    ${this.getAttribute('columna')}
+    area:       ${this.getAttribute('area')}
+    valor:      ${this.textContent} 
+    `)
+});
+
+document.oncontextmenu = function() { //· Desactivamos el menu de contexto para que no salga cuando usemos click derecho con el raton ·//
+    return false;
+  }
+
 createGrid('sudokuQ'); //· Crea el tablero de sudoku en el div con el nombre sudokuQ·//
 createHelp(); //· Crea el div de trabajo·//
 
