@@ -1,5 +1,5 @@
 import * as config from './config.js';
-// import * as funciones from './funciones.js';
+import * as funciones from './funciones.js';
 
 console.log(config.primero)
 const createGrid = (place) => {
@@ -130,6 +130,7 @@ document.attachEvent = function( evt, q, fn ) {		//· Para crear los eventos de 
 };
 
  document.attachEvent('click','.casillas', function() {
+  /*
     var modal = document.getElementById("myModal");
     var modalContent = document.getElementById("cosas");
     var span = document.getElementById("close");
@@ -157,16 +158,15 @@ document.attachEvent = function( evt, q, fn ) {		//· Para crear los eventos de 
         body.style.height = "auto";
         body.style.overflow = "visible";
     }
+    */
+   const numero = prompt('Cual ponemos?','');
+   this.style.color='red';
+   this.textContent=numero;
 });
 
 document.attachEvent('contextmenu','.casillas', function() { //· click derecho sobre las casillas ·//
-    alert(`
-    Casilla:    ${this.id.match(/(\d+)/g)}
-    fila:       ${this.getAttribute('fila')}
-    columna:    ${this.getAttribute('columna')}
-    area:       ${this.getAttribute('area')}
-    valor:      ${this.textContent} 
-    `)
+    funciones.buscaNumero(this.textContent);
+
 });
 
 document.oncontextmenu = function() { //· Desactivamos el menu de contexto para que no salga cuando usemos click derecho con el raton ·//
@@ -175,4 +175,6 @@ document.oncontextmenu = function() { //· Desactivamos el menu de contexto para
 
 createGrid('sudokuQ'); //· Crea el tablero de sudoku en el div con el nombre sudokuQ·//
 createHelp(); //· Crea el div de trabajo·//
+
+
 
