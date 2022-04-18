@@ -4,6 +4,7 @@ export const resuelve = () => {
 			marcaNumero(i) 
 			}
 	}
+	limpia()
 }
 export const cuantosFaltan = () => {
 	return document.querySelectorAll(`div:empty`).length
@@ -73,6 +74,14 @@ export const limpia = () =>{
 	for (let i=1; i<=81;i++){
 		const casillaSeleccionada = document.getElementById(`casilla${i}`)
 			casillaSeleccionada.style.backgroundColor = '#FFF4DB'
+		}
+		
+}
+
+export const reset = () =>{
+	for (let i=1; i<=81;i++){
+		const casillaSeleccionada = document.getElementById(`casilla${i}`)
+			casillaSeleccionada.textContent='';
 		}
 		
 }

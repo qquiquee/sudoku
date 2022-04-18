@@ -13,8 +13,10 @@ const createGrid = (place) => {
         height:60vh;
         display: inline-grid;
         border: 3px #110156 solid; 
-        grid-template-columns: repeat(9,11.1111%);
-        grid-template-rows:  repeat(9,11.1111%);
+        border-bottom: 1px #110156 solid;
+        border-right : 1px #110156 solid;
+        grid-template-columns: repeat(10,10%);
+        grid-template-rows:  repeat(10,10%);
             "
     >
     </div>
@@ -26,34 +28,87 @@ const createGrid = (place) => {
 
 const fillGrid = (color) => {
     const container = document.getElementById('container')
-    let gruesoT=1,gruesoR=1,colorL='#000000', numCasilla=1, area=1;
-    for (let i=1; i<=9;i++){
-        for (let j=1; j<=9;j++){
-            if(i==4 || i==7){gruesoT=3;colorL='#110156';}
-            if(j==3 || j==6){gruesoR=3;colorL='#110156';}
-            let casilla = `
-            <div 
-            id="casilla${numCasilla}" 
-            class="casillas" 
-            fila=${i} 
-            columna=${j} 
-            area=${config.areas[numCasilla]}
-            style="
-            background-color: ${color};
-                border: 1px black solid;
-                border-top: ${gruesoT}px ${colorL} solid;
-                border-right : ${gruesoR}px ${colorL} solid;
-                text-align: center;
-                font-size : 5vh;
-                padding-top: 0.2vh;
-                ">
-            ${i}
-            </div>`
+    let gruesoT=1,gruesoR=1,colorL='#000000', numCasilla=1, area=1, casilla='';
+    for (let i=1; i<=10;i++){
+        for (let j=1; j<=10;j++){
+            if(i==3 || i==6 || i==9){gruesoT=3;colorL='#110156';}
+            if(j==3 || j==6 || j==9){gruesoR=3;colorL='#110156';}
+            if (i != 10 && j != 10){
+                casilla = `
+                <div 
+                id="casilla${numCasilla}" 
+                class="casillas" 
+                fila=${i} 
+                columna=${j} 
+                area=${config.areas[numCasilla]}
+                style="
+                background-color: ${color};
+                    border: 1px black solid;
+                    border-bottom: ${gruesoT}px ${colorL} solid;
+                    border-right : ${gruesoR}px ${colorL} solid;
+                    text-align: center;
+                    font-size : 5vh;
+                    padding-top: 0.2vh;
+                    ">
+                ${i}
+                </div>`
+                numCasilla++;
+            }else{
+                casilla = `
+                <div 
+                id="menu${i}${j}" 
+                class="menu" 
+                style="
+                background-color: white;
+                    border: 1px #110156 solid;
+                    text-align: center;
+                    font-size : 5vh;
+                    padding-top: 0.2vh;
+                    ">
+                </div>
+                `
+            }
             container.innerHTML += casilla
-            gruesoT=1; gruesoR=1; colorL='#000000'; numCasilla++;
+            gruesoT=1; gruesoR=1; colorL='#000000'; 
+            
             };
         };
     }
+
+    const createMenu = () => {
+
+        const resolver = document.getElementById('menu110')
+        resolver.style.borderTop='1px';
+        resolver.style.textAlign='center';
+        resolver.style.fontSize='4vh';
+        resolver.style.paddingTop='0,2vh';
+        resolver.textContent='🎯';
+        resolver.title='Resolver';
+
+        const reset = document.getElementById('menu210')
+        reset.style.textAlign='center';
+        reset.style.fontSize='4vh';
+        reset.style.paddingTop='0,2vh';
+        reset.textContent='⬜️';
+        reset.title='Reset';
+
+        const deseleccion = document.getElementById('menu310')
+        deseleccion.style.textAlign='center';
+        deseleccion.style.fontSize='4vh';
+        deseleccion.style.paddingTop='0,2vh';
+        deseleccion.textContent='🛀';
+        deseleccion.title='Limpiar seleccion';
+
+        const ayuda = document.getElementById('menu410')
+        ayuda.style.textAlign='center';
+        ayuda.style.fontSize='4vh';
+        ayuda.style.paddingTop='0,2vh';
+        ayuda.textContent='🪄';
+        ayuda.title='Ayuda';
+
+        
+
+        }
 
 const cargarProblema = (posicion) => {
     for (let i=1; i<=81;i++){
@@ -129,8 +184,17 @@ document.attachEvent = function( evt, q, fn ) {		//· Para crear los eventos de 
 	});  
 };
 
- document.attachEvent('click','.casillas', function() {
-  /*
+document.attachEvent('click','#menu110', function() {
+    funciones.resuelve();
+ })
+ document.attachEvent('click','#menu210', function() {
+    funciones.reset();
+ })
+ document.attachEvent('click','#menu310', function() {
+    funciones.limpia();
+ })
+ document.attachEvent('click','#menu410', function() {
+      
     var modal = document.getElementById("myModal");
     var modalContent = document.getElementById("cosas");
     var span = document.getElementById("close");
@@ -158,7 +222,14 @@ document.attachEvent = function( evt, q, fn ) {		//· Para crear los eventos de 
         body.style.height = "auto";
         body.style.overflow = "visible";
     }
-    */
+    
+ })
+
+ document.attachEvent('mouseover','.menu', function() {
+    this.style.cursor ='pointer';
+ })
+
+ document.attachEvent('click','.casillas', function() {
    const numero = prompt('Cual ponemos?','');
    this.style.color='red';
    this.textContent=numero;
@@ -174,8 +245,10 @@ document.oncontextmenu = function() { //· Desactivamos el menu de contexto para
 }
 
 createGrid('sudokuQ'); //· Crea el tablero de sudoku en el div con el nombre sudokuQ·//
-createHelp(); //· Crea el div de trabajo·//
 
-funciones.resuelve();
+createHelp(); //· Crea el div de ayuda//
+createMenu();
+
+
 
 
