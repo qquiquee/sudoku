@@ -1,4 +1,4 @@
-export const buscaNumero = (numero) => {
+export const marcaNumero = (numero) => {
 	const fila=[];
 	const columna=[];
 	const area=[];
@@ -24,6 +24,43 @@ export const buscaNumero = (numero) => {
 
 		}
 	}
+
+buscaNumero(numero)
+}
+
+export const buscaNumero =(numero)=>{
+	const casillasCandidatas = document.querySelectorAll(`div[style*="background-color: rgb(255, 244, 219)"]`);
+	const fila=[];
+	const columna=[];
+	const area=[];
+	
+	for (let i=1; i<=9;i++){
+		fila[i] = document.querySelectorAll(`div[fila='${i}']`);
+		columna[i] = document.querySelectorAll(`div[columna='${i}']`);
+		area[i] = document.querySelectorAll(`div[area='${i}']`);
+	}
+
+	console.log(document.querySelectorAll(`div[area='1'][style*="background-color: rgb(255, 244, 219)"]`).length)
+	casillasCandidatas.forEach(candidata => {
+
+		if(document.querySelectorAll(`div[area='${candidata.getAttribute('area')}'][style*="background-color: rgb(255, 244, 219)"]`).length == 1){
+			console.log(candidata)
+			candidata.style.color='red';
+			candidata.textContent=numero;
+		}
+		if(document.querySelectorAll(`div[fila='${candidata.getAttribute('fila')}'][style*="background-color: rgb(255, 244, 219)"]`).length == 1){
+			console.log(candidata)
+			candidata.style.color='red';
+			candidata.textContent=numero;
+		}
+		if(document.querySelectorAll(`div[columna='${candidata.getAttribute('columna')}'][style*="background-color: rgb(255, 244, 219)"]`).length == 1){
+			console.log(candidata)
+			candidata.style.color='red';
+			candidata.textContent=numero;
+		}
+
+
+	});
 
 }
 

@@ -165,7 +165,7 @@ document.attachEvent = function( evt, q, fn ) {		//· Para crear los eventos de 
 });
 
 document.attachEvent('contextmenu','.casillas', function() { //· click derecho sobre las casillas ·//
-    funciones.buscaNumero(this.textContent);
+    funciones.marcaNumero(this.textContent);
 
 });
 
