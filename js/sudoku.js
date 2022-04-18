@@ -176,5 +176,6 @@ document.oncontextmenu = function() { //· Desactivamos el menu de contexto para
 createGrid('sudokuQ'); //· Crea el tablero de sudoku en el div con el nombre sudokuQ·//
 createHelp(); //· Crea el div de trabajo·//
 
+funciones.resuelve();
 
 

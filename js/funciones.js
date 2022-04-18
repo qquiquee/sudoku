@@ -1,3 +1,13 @@
+export const resuelve = () => {
+	while (cuantosFaltan() > 0){		
+		for (let i=1; i<=9;i++){
+			marcaNumero(i) 
+			}
+	}
+}
+export const cuantosFaltan = () => {
+	return document.querySelectorAll(`div:empty`).length
+}
 export const marcaNumero = (numero) => {
 	const fila=[];
 	const columna=[];
@@ -9,9 +19,7 @@ export const marcaNumero = (numero) => {
 		area[i] = document.querySelectorAll(`div[area='${i}']`);
 	}
 	limpia()
-	for (let i=1; i<=81;i++){
-
-		
+	for (let i=1; i<=81;i++){		
 		const casillaSeleccionada = document.getElementById(`casilla${i}`)
 		if(casillaSeleccionada.textContent){casillaSeleccionada.style.backgroundColor = '#FFE5B6'}; // Marcamos casilla rellena
 		if (casillaSeleccionada.textContent == numero){
@@ -21,10 +29,8 @@ export const marcaNumero = (numero) => {
 			columna[casillaSeleccionada.getAttribute('columna')].forEach(element => {element.style.backgroundColor = '#FFE5B6'}); // Marcamos la columna
 
 			casillaSeleccionada.style.backgroundColor = '#FABF5A' // Marcamos la casilla
-
 		}
 	}
-
 buscaNumero(numero)
 }
 
@@ -40,21 +46,20 @@ export const buscaNumero =(numero)=>{
 		area[i] = document.querySelectorAll(`div[area='${i}']`);
 	}
 
-	console.log(document.querySelectorAll(`div[area='1'][style*="background-color: rgb(255, 244, 219)"]`).length)
 	casillasCandidatas.forEach(candidata => {
 
 		if(document.querySelectorAll(`div[area='${candidata.getAttribute('area')}'][style*="background-color: rgb(255, 244, 219)"]`).length == 1){
-			console.log(candidata)
+			// console.log(candidata)
 			candidata.style.color='red';
 			candidata.textContent=numero;
 		}
 		if(document.querySelectorAll(`div[fila='${candidata.getAttribute('fila')}'][style*="background-color: rgb(255, 244, 219)"]`).length == 1){
-			console.log(candidata)
+			// console.log(candidata)
 			candidata.style.color='red';
 			candidata.textContent=numero;
 		}
 		if(document.querySelectorAll(`div[columna='${candidata.getAttribute('columna')}'][style*="background-color: rgb(255, 244, 219)"]`).length == 1){
-			console.log(candidata)
+			// console.log(candidata)
 			candidata.style.color='red';
 			candidata.textContent=numero;
 		}
