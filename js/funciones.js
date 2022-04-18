@@ -1,11 +1,55 @@
 export const resuelve = () => {
+	let intentos=0;
 	while (cuantosFaltan() > 0){		
 		for (let i=1; i<=9;i++){
 			marcaNumero(i) 
 			}
+			intentos++;
+			if(intentos > 300){
+				console.log('300 intentos y nada');
+				buscarCandidatos()
+				return;
+			}
 	}
 	limpia()
 }
+
+export const buscarCandidatos = () => {		
+	limpia();
+	const vacias = document.querySelectorAll(`div:empty`);
+	vacias.forEach(element => {
+		
+		// element.setAttribute('candidatos','disabled');	
+		
+		
+		let resultado=[1,2,3,4,5,6,7,8,9];		
+		const area = document.querySelectorAll(`div[area='${element.getAttribute('area')}']`);
+		area.forEach(element => {
+			let index = resultado.indexOf(parseInt(element.textContent));		
+			if (index > -1) {
+			   resultado.splice(index, 1);
+			}			
+		}); 
+		const fila = document.querySelectorAll(`div[fila='${element.getAttribute('fila')}']`);
+		fila.forEach(element => {
+			let index = resultado.indexOf(parseInt(element.textContent));		
+			if (index > -1) {
+			   resultado.splice(index, 1);
+			}			
+		}); 
+		const columna = document.querySelectorAll(`div[columna='${element.getAttribute('columna')}']`);
+		columna.forEach(element => {
+			let index = resultado.indexOf(parseInt(element.textContent));		
+			if (index > -1) {
+			   resultado.splice(index, 1);
+			}			
+		}); 
+		
+		element.title=resultado;
+
+	}); 
+}
+
 export const cuantosFaltan = () => {
 	return document.querySelectorAll(`div:empty`).length
 }
@@ -86,3 +130,13 @@ export const reset = () =>{
 		
 }
 
+export const jsonConsola = () =>{
+	let elJson={};
+	
+	for (let i=1; i<=81;i++){
+    	let dato=document.getElementById(`casilla${i}`).textContent;
+		if(dato){ elJson[i]=parseInt(dato) }
+	}
+		
+	return elJson 
+}

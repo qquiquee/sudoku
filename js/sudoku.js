@@ -23,7 +23,7 @@ const createGrid = (place) => {
     `
     placeIn.innerHTML = markup
     fillGrid('#FFF4DB'); //· Crea las casillas con el color definido ·//
-    cargarProblema(config.primero); //· Carga un problema de ejemplo ·//
+    cargarProblema(config.avanzado1); //· Carga un problema de ejemplo ·//
 }
 
 const fillGrid = (color) => {
@@ -106,6 +106,13 @@ const fillGrid = (color) => {
         ayuda.textContent='🪄';
         ayuda.title='Ayuda';
 
+        const jsonConsola = document.getElementById('menu510')
+        jsonConsola.style.textAlign='center';
+        jsonConsola.style.fontSize='4vh';
+        jsonConsola.style.paddingTop='0,2vh';
+        jsonConsola.textContent='💾';
+        jsonConsola.title='JSON por consola';
+        
         
 
         }
@@ -223,6 +230,10 @@ document.attachEvent('click','#menu110', function() {
         body.style.overflow = "visible";
     }
     
+ })
+
+ document.attachEvent('click','#menu510', function() {
+    console.log(JSON.stringify(funciones.jsonConsola(),null,2));
  })
 
  document.attachEvent('mouseover','.menu', function() {
